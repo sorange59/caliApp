@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Alert, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Image, View, Alert, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const App = () => {
@@ -29,69 +29,71 @@ const App = () => {
   };
   
   return (
+    <ImageBackground source={require('./assets/cal.png')} style={styles.backgroundImage}>
+    
+    
     <View style={{ flex: 1, padding: 30 }}>
     {/* Image centered */}
-    <Image
-    source={require('./assets/cal.png')}
-    style={styles.headerImage}
-    />
+    <Image source={require('./assets/cal.png')} style={styles.headerImage} />
     
     {/* BUTTONS */}
     <View style={styles.footer}>
     {/* Reserve */}
-    <TouchableOpacity
-    style={styles.footerButton}
-    onPress={handleReservePress}
-    >
+    <TouchableOpacity style={styles.footerButton} onPress={handleReservePress}>
     <Icon name="book-information-variant" type="material" color="#fff" size={20} />
     <Text style={styles.iconText}>Reserve</Text>
     </TouchableOpacity>
     
     {/* Menu */}
-    <TouchableOpacity
-    style={styles.footerButton}
-    onPress={handleMenuPress}
-    >
+    <TouchableOpacity style={styles.footerButton} onPress={handleMenuPress}>
     <Icon name="taco" type="material" color="#fff" size={24} />
     <Text style={styles.iconText}>Menu</Text>
     </TouchableOpacity>
     
-    {/* Home  */}
-    <TouchableOpacity
-    style={styles.footerButton}
-    onPress={handleHomePress}
-    >
+    {/* Home */}
+    <TouchableOpacity style={styles.footerButton} onPress={handleHomePress}>
     <Icon name="home" type="material" color="#fff" size={24} />
     <Text style={styles.iconText}>Home</Text>
     </TouchableOpacity>
+    
     {/* Rewards */}
-    <TouchableOpacity
-    style={styles.footerButton}
-    onPress={handleRewardsPress}
-    >
+    <TouchableOpacity style={styles.footerButton} onPress={handleRewardsPress}>
     <Icon name="gift" type="material" color="#fff" size={24} />
     <Text style={styles.iconText}>Rewards</Text>
     </TouchableOpacity>
+    
     {/* More */}
-    <TouchableOpacity
-    style={styles.footerButton}
-    onPress={handleMorePress}
-    >
+    <TouchableOpacity style={styles.footerButton} onPress={handleMorePress}>
     <Icon name="more" type="material" color="#fff" size={24} />
     <Text style={styles.iconText}>More</Text>
     </TouchableOpacity>
     </View>
     </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'repeat',
+    justifyContent: 'center',
+    width: '100%',
+    height: 'auto'
+  },
+  domanda: {
+    color: '#fff',
+    fontSize: 24,
+    textAlign: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    padding: 10,
+  },
   headerImage: {
-    width: '65%',
+    width: '50%',
     height: 100,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
     marginBottom: 20,
-    marginTop: 10,
+    marginTop: 5,
     alignSelf: 'center',
     // Other styling for your image
   },
@@ -105,7 +107,6 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'rgba(0, 0, 0, 0.5)', // Add a background color to the footer
     alignSelf: 'center',
-    
   },
   footerButton: {
     backgroundColor: '#228b22',
