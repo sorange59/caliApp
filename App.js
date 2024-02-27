@@ -1,6 +1,8 @@
 import React from 'react';
-import { Image, View, Alert, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import { Image, View, Alert, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Video } from 'expo-av';  // Import Video from 'expo-av' instead of 'react-native-video'
+import Constants from 'expo-constants';
 
 const App = () => {
   const handleReservePress = () => {
@@ -28,13 +30,41 @@ const App = () => {
     // You can replace this with your desired action
   };
   
+  const handleLogin = () => {
+    Alert.alert('Login?');
+    // You can replace this with your desired action
+  };
+  
+  
   return (
-    <ImageBackground source={require('./assets/cal.png')} style={styles.backgroundImage}>
-    
-    
-    <View style={{ flex: 1, padding: 30 }}>
-    {/* Image centered */}
+    <View style={{ flex: 1 }}>
+    {/* Header */}
+    <View style={styles.header}>
     <Image source={require('./assets/cal.png')} style={styles.headerImage} />
+    {/* Login */}
+    <TouchableOpacity style={styles.headerLogin_Button} onPress={handleLogin}>
+    <Icon name="login" type="material" color="#fff" size={15} />
+    <Text style={styles.iconText_Header}>Login</Text>
+    </TouchableOpacity>
+    {/* Items Cart */}
+    <TouchableOpacity style={styles.headerCart_Button} onPress={handleLogin}>
+    <Icon name="cart" type="material" color="#fff" size={15} />
+    <Text style={styles.iconText_Header}>Cart</Text>
+    </TouchableOpacity>
+    </View>
+    
+    
+    
+    {/* Main content with ScrollView */}
+     <ScrollView style={styles.scrollView}>
+        <Video
+          source={require('./assets/CaliTacosVideo.m4v')}
+          useNativeControls
+          resizeMode="contain"
+          style={styles.video}
+        />
+      </ScrollView>
+    
     
     {/* BUTTONS */}
     <View style={styles.footer}>
@@ -69,57 +99,97 @@ const App = () => {
     </TouchableOpacity>
     </View>
     </View>
-    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  backgroundImage: {
+  scrollView: {
     flex: 1,
-    resizeMode: 'repeat',
-    justifyContent: 'center',
-    width: '100%',
-    height: 'auto'
+    maxHeight: 500,
+    marginHorizontal: 20,
   },
-  domanda: {
-    color: '#fff',
-    fontSize: 24,
-    textAlign: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    padding: 10,
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+    
+    
+  },
+  video: {
+    flex: 1,
+    position: 'absolute',
+    top: 100,
+    left: 0,
+    bottom: 10,
+    right: 0,
+    width: '100%',
+    height: 'auto',
+    
+  },
+  header: {
+    width: '100%',
+    height: 'auto',
+    position: 'absolute',
+    alignItems: 'center',
+    padding: 20,
+    top: 0,
+    backgroundColor: '#2A2929',
   },
   headerImage: {
-    width: '50%',
-    height: 100,
+    width: '70%',
+    height: 70,
+    top: 25,
     resizeMode: 'contain',
     marginBottom: 20,
-    marginTop: 5,
     alignSelf: 'center',
-    // Other styling for your image
+  },
+  headerLogin_Button: {
+    position: 'absolute',
+    left: 25,
+    top: 64,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(50, 255, 20, 0.5)',
+    padding: 15,
+    borderRadius: 10,
+  },
+  headerCart_Button: {
+    position: 'absolute',
+    right: 20,
+    top: 64,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'green',
+    padding: 15,
+    borderRadius: 10,
+  },
+  iconText_Header: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 15,
+    alignSelf: 'center',
   },
   footer: {
     position: 'absolute',
-    bottom: 10,
+    bottom: 0,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '120%',
+    width: '100%',
     height: 'auto',
-    padding: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Add a background color to the footer
+    padding: 20,
+    backgroundColor: '#2A2929',
     alignSelf: 'center',
   },
   footerButton: {
     backgroundColor: '#228b22',
     borderRadius: 10,
     padding: 5,
-    alignItems: 'center', // Center the content horizontally
-    width: '19%',
-    row: 'space-between',
+    alignItems: 'center',
+    width: '18%',
   },
   iconText: {
     color: '#fff',
     fontSize: 16,
-    marginTop: 5, // Adjust as needed
+    marginTop: 5,
   },
 });
 
