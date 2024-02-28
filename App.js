@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Alert, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, StatusBar } from 'react-native';
+import { Font, Image, View, Alert, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, StatusBar } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Video } from 'expo-av';  // Import Video from 'expo-av' instead of 'react-native-video'
 import Constants from 'expo-constants';
@@ -34,6 +34,10 @@ const App = () => {
     Alert.alert('Login?');
     // You can replace this with your desired action
   };
+  const handleCheckout = () => {
+    Alert.alert('Go to Checkout?');
+    // You can replace this with your desired action
+  };
   
   
   return (
@@ -47,7 +51,7 @@ const App = () => {
         <Text style={styles.iconText_Header}>Login</Text>
       </TouchableOpacity>
       {/* Items Cart */}
-      <TouchableOpacity style={styles.headerCart_Button} onPress={handleLogin}>
+      <TouchableOpacity style={styles.headerCart_Button} onPress={handleCheckout}>
         <Icon name="cart" type="material" color="#fff" size={15} />
         <Text style={styles.iconText_Header}>Cart</Text>
       </TouchableOpacity>
@@ -64,6 +68,12 @@ const App = () => {
             resizeMode="cover"
             style={styles.video}
           />
+          <Text style={styles.bigText}>DEALS</Text>
+          <Image source={require('./assets/3Tacos.jpg')} style={styles.dealsImage_topLeft} />
+          <Image source={require('./assets/rolledTacos.jpg')} style={styles.dealsImage_topLeft} />
+          <Image source={require('./assets/toGoPack.jpg')} style={styles.dealsImage_bottomRight} />
+          
+          
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -73,7 +83,7 @@ const App = () => {
         {/* Reserve */}
         
         <TouchableOpacity style={styles.footerButton} onPress={handleReservePress}>
-          <Icon name="book-information-variant" type="material" color="#fff" size={20} />
+          <Icon name="book-information-variant" type="material" color="#fff" size={24} />
           <Text style={styles.iconText}>Reserve</Text>
         </TouchableOpacity>
         
@@ -107,23 +117,6 @@ const App = () => {
   
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-    
-    
-  },
-  scrollView: {
-    backgroundColor: 'lightgreen',
-    top: 83,
-    width: '100%',
-    
-  },
-  video: {
-    width: '100%',
-    padding: 100,
-    height: undefined, // Set an appropriate height for your video
-  },
   header: {
     width: '100%',
     height: 'auto',
@@ -131,34 +124,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     backgroundColor: '#2A2929',
+    zIndex: 1, // Add this line to set the zIndex of the header
+    
+    
   },
   headerImage: {
     width: '70%',
-    height: 70,
-    top: 25,
+    height: 75,
+    top: 30,
     resizeMode: 'contain',
     marginBottom: 20,
     alignSelf: 'center',
   },
   headerLogin_Button: {
     position: 'absolute',
-    left: 25,
-    top: 64,
-    flexDirection: 'row',
+    left: 20,
+    top: 55,
     alignItems: 'center',
-    backgroundColor: 'rgba(50, 255, 20, 0.5)',
-    padding: 15,
-    
-    borderRadius: 20,
+    padding: 20,
+    borderRadius: 10,
   },
   headerCart_Button: {
     position: 'absolute',
     right: 20,
-    top: 64,
-    flexDirection: 'row',
+    top: 55,
     alignItems: 'center',
-    backgroundColor: 'green',
-    padding: 15,
+    padding: 20,
     borderRadius: 10,
   },
   iconText_Header: {
@@ -167,6 +158,54 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignSelf: 'center',
   },
+  
+  
+  container: {
+    flex: 3,
+    width: '100%',
+  },
+  scrollView: {
+    backgroundColor: 'lightgreen',
+    top: 88,
+    width: '100%',
+    
+  },
+  video: {
+    width: '99%',
+    top: 1,
+    left: 2,
+    padding: 100,
+    borderRadius: 10,
+    height: undefined, // Set an appropriate height for your video
+  },
+  bigText: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+    width: '100%',
+    backgroundColor: 'grey',
+    
+  },
+  dealsImage_topLeft: {
+    resizeMode: 'contain',
+    width: '45%',
+    alignItems: 'flex-start',
+    position: 'relative',
+    height: 190,
+    left: 10,
+  },
+  dealsImage_bottomRight: {
+    resizeMode: 'contain',
+    width: '45%',
+    alignItems: 'flex-end',
+    position: 'relative',
+    height: 190,
+    left: 200,
+    bottom: 190,
+    
+    
+  },
+  
   footer: {
     position: 'absolute',
     bottom: 0,
@@ -177,6 +216,9 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: '#2A2929',
     alignSelf: 'center',
+    flex: 2,
+    zIndex: 1, // Add this line to set the zIndex of the header
+    
   },
   footerButton: {
     backgroundColor: '#228b22',
