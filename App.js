@@ -37,93 +37,92 @@ const App = () => {
   
   
   return (
-    <View style={{ flex: 1 }}>
+  <View style={{ flex: 1 }}>
     {/* Header */}
     <View style={styles.header}>
-    <Image source={require('./assets/cal.png')} style={styles.headerImage} />
-    {/* Login */}
-    <TouchableOpacity style={styles.headerLogin_Button} onPress={handleLogin}>
-    <Icon name="login" type="material" color="#fff" size={15} />
-    <Text style={styles.iconText_Header}>Login</Text>
-    </TouchableOpacity>
-    {/* Items Cart */}
-    <TouchableOpacity style={styles.headerCart_Button} onPress={handleLogin}>
-    <Icon name="cart" type="material" color="#fff" size={15} />
-    <Text style={styles.iconText_Header}>Cart</Text>
-    </TouchableOpacity>
+      <Image source={require('./assets/cal.png')} style={styles.headerImage} />
+      {/* Login */}
+      <TouchableOpacity style={styles.headerLogin_Button} onPress={handleLogin}>
+        <Icon name="login" type="material" color="#fff" size={15} />
+        <Text style={styles.iconText_Header}>Login</Text>
+      </TouchableOpacity>
+      {/* Items Cart */}
+      <TouchableOpacity style={styles.headerCart_Button} onPress={handleLogin}>
+        <Icon name="cart" type="material" color="#fff" size={15} />
+        <Text style={styles.iconText_Header}>Cart</Text>
+      </TouchableOpacity>
     </View>
-    
-    
-    
-    {/* Main content with ScrollView */}
-     <ScrollView style={styles.scrollView}>
-        <Video
-          source={require('./assets/CaliTacosVideo.m4v')}
-          useNativeControls
-          resizeMode="contain"
-          style={styles.video}
-        />
+
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.videoContainer}>
+          <Video
+            source={require('./assets/CaliTacosVideo.m4v')}
+            shouldPlay
+            isMuted
+            isLooping
+            resizeMode="cover"
+            style={styles.video}
+          />
+        </View>
       </ScrollView>
-    
-    
-    {/* BUTTONS */}
-    <View style={styles.footer}>
-    {/* Reserve */}
-    <TouchableOpacity style={styles.footerButton} onPress={handleReservePress}>
-    <Icon name="book-information-variant" type="material" color="#fff" size={20} />
-    <Text style={styles.iconText}>Reserve</Text>
-    </TouchableOpacity>
-    
-    {/* Menu */}
-    <TouchableOpacity style={styles.footerButton} onPress={handleMenuPress}>
-    <Icon name="taco" type="material" color="#fff" size={24} />
-    <Text style={styles.iconText}>Menu</Text>
-    </TouchableOpacity>
-    
-    {/* Home */}
-    <TouchableOpacity style={styles.footerButton} onPress={handleHomePress}>
-    <Icon name="home" type="material" color="#fff" size={24} />
-    <Text style={styles.iconText}>Home</Text>
-    </TouchableOpacity>
-    
-    {/* Rewards */}
-    <TouchableOpacity style={styles.footerButton} onPress={handleRewardsPress}>
-    <Icon name="gift" type="material" color="#fff" size={24} />
-    <Text style={styles.iconText}>Rewards</Text>
-    </TouchableOpacity>
-    
-    {/* More */}
-    <TouchableOpacity style={styles.footerButton} onPress={handleMorePress}>
-    <Icon name="more" type="material" color="#fff" size={24} />
-    <Text style={styles.iconText}>More</Text>
-    </TouchableOpacity>
-    </View>
+    </SafeAreaView>
+      
+      {/* Footer */}
+      <View style={styles.footer}>
+        {/* Reserve */}
+        
+        <TouchableOpacity style={styles.footerButton} onPress={handleReservePress}>
+          <Icon name="book-information-variant" type="material" color="#fff" size={20} />
+          <Text style={styles.iconText}>Reserve</Text>
+        </TouchableOpacity>
+        
+        {/* Menu */}
+        <TouchableOpacity style={styles.footerButton} onPress={handleMenuPress}>
+          <Icon name="taco" type="material" color="#fff" size={24} />
+          <Text style={styles.iconText}>Menu</Text>
+        </TouchableOpacity>
+        
+        {/* Home */}
+        <TouchableOpacity style={styles.footerButton} onPress={handleHomePress}>
+          <Icon name="home" type="material" color="#fff" size={24} />
+          <Text style={styles.iconText}>Home</Text>
+        </TouchableOpacity>
+        
+        {/* Rewards */}
+        <TouchableOpacity style={styles.footerButton} onPress={handleRewardsPress}>
+          <Icon name="gift" type="material" color="#fff" size={24} />
+          <Text style={styles.iconText}>Rewards</Text>
+        </TouchableOpacity>
+        
+        {/* More */}
+        <TouchableOpacity style={styles.footerButton} onPress={handleMorePress}>
+          <Icon name="more" type="material" color="#fff" size={24} />
+          <Text style={styles.iconText}>More</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
+  
 
 const styles = StyleSheet.create({
-  scrollView: {
-    flex: 1,
-    maxHeight: 500,
-    marginHorizontal: 20,
-  },
   container: {
     flex: 1,
-    paddingTop: StatusBar.currentHeight,
+    width: '100%',
     
+    
+  },
+  scrollView: {
+    backgroundColor: 'lightgreen',
+    top: 83,
+    width: '100%',
     
   },
   video: {
-    flex: 1,
-    position: 'absolute',
-    top: 100,
-    left: 0,
-    bottom: 10,
-    right: 0,
     width: '100%',
-    height: 'auto',
-    
+    padding: 100,
+    height: undefined, // Set an appropriate height for your video
   },
   header: {
     width: '100%',
@@ -131,7 +130,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     padding: 20,
-    top: 0,
     backgroundColor: '#2A2929',
   },
   headerImage: {
@@ -150,7 +148,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(50, 255, 20, 0.5)',
     padding: 15,
-    borderRadius: 10,
+    
+    borderRadius: 20,
   },
   headerCart_Button: {
     position: 'absolute',
