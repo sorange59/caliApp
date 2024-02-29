@@ -3,6 +3,13 @@ import { Font, Image, View, Alert, Text, StyleSheet, TouchableOpacity, ScrollVie
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Video } from 'expo-av';  // Import Video from 'expo-av' instead of 'react-native-video'
 import Constants from 'expo-constants';
+import { useFonts } from 'expo-font';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Menu from './Menu';
+import AppStack from './AppStack';
+
+
 
 const App = () => {
   const handleReservePress = () => {
@@ -11,7 +18,7 @@ const App = () => {
   };
   
   const handleMenuPress = () => {
-    Alert.alert('Menu button clicked');
+    navigation.navigate('Menu')
     // You can replace this with your desired action
   };
   
@@ -38,7 +45,7 @@ const App = () => {
     Alert.alert('Go to Checkout?');
     // You can replace this with your desired action
   };
-  
+
   
   return (
   <View style={{ flex: 1 }}>
@@ -46,7 +53,7 @@ const App = () => {
     <View style={styles.header}>
       <Image source={require('./assets/cal.png')} style={styles.headerImage} />
       {/* Login */}
-      <TouchableOpacity style={styles.headerLogin_Button} onPress={handleLogin}>
+      <TouchableOpacity style={styles.headerLogin_Button} onPress={() => navigation.navigate("Menu")}>
         <Icon name="login" type="material" color="#fff" size={15} />
         <Text style={styles.iconText_Header}>Login</Text>
       </TouchableOpacity>
@@ -88,7 +95,7 @@ const App = () => {
         </TouchableOpacity>
         
         {/* Menu */}
-        <TouchableOpacity style={styles.footerButton} onPress={handleMenuPress}>
+        <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate('Menu')}>
           <Icon name="taco" type="material" color="#fff" size={24} />
           <Text style={styles.iconText}>Menu</Text>
         </TouchableOpacity>
@@ -181,17 +188,19 @@ const styles = StyleSheet.create({
   bigText: {
     fontSize: 50,
     fontWeight: 'bold',
-    fontFamily: 'Roboto',
     width: '100%',
-    backgroundColor: 'grey',
+    backgroundColor: 'lightgrey',
+    padding: 10,
+    top: 3,
     
   },
   dealsImage_topLeft: {
     resizeMode: 'contain',
-    width: '45%',
+    width: '46%',
     alignItems: 'flex-start',
     position: 'relative',
-    height: 190,
+    height: 200,
+    top: 5,
     left: 10,
   },
   dealsImage_bottomRight: {
@@ -233,5 +242,11 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 });
+
+
+
+
+
+
 
 export default App;
