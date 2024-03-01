@@ -1,14 +1,13 @@
-import React from 'react';
-import { Font, Image, View, Alert, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, StatusBar } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Font, Image, View, Alert, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, StatusBar, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Video } from 'expo-av';  // Import Video from 'expo-av' instead of 'react-native-video'
 import Constants from 'expo-constants';
 import { useFonts } from 'expo-font';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Menu from './Menu';
-import AppStack from './AppStack';
-
+import { AppLoading } from 'expo-app-loading';
+import SedgwickAve from './assets/fonts/SedgwickAve.ttf';
 
 
 const App = () => {
@@ -46,6 +45,17 @@ const App = () => {
     // You can replace this with your desired action
   };
 
+  const [fontLoaded, setFontLoaded] = useState(false);
+
+  const [loaded] = useFonts({
+    'SedgwickAve-Regular': require('./assets/fonts/SedgwickAve.ttf'),
+  });
+
+  useEffect(() => {
+    if (loaded) {
+      setFontLoaded(true);
+    }
+  }, [loaded]);
   
   return (
   <View style={{ flex: 1 }}>
@@ -64,7 +74,7 @@ const App = () => {
       </TouchableOpacity>
     </View>
 
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} backgroundImage={require('./assets/cal.png')}>
       <ScrollView style={styles.scrollView}>
         <View style={styles.videoContainer}>
           <Video
@@ -76,9 +86,14 @@ const App = () => {
             style={styles.video}
           />
           <Text style={styles.bigText}>DEALS</Text>
-          <Image source={require('./assets/3Tacos.jpg')} style={styles.dealsImage_topLeft} />
-          <Image source={require('./assets/rolledTacos.jpg')} style={styles.dealsImage_topLeft} />
-          <Image source={require('./assets/toGoPack.jpg')} style={styles.dealsImage_bottomRight} />
+          
+          <SafeAreaView style={styles.horiContainer}>
+            <ScrollView horizontal={true} style={styles.horiScroll}>
+              <Image source={require('./assets/3Tacos.jpg')} style={styles.dealsHori_Scroll} />
+              <Image source={require('./assets/rolledTacos.jpg')} style={styles.dealsHori_Scroll} />
+              <Image source={require('./assets/toGoPack.jpg')} style={styles.dealsHori_Scroll} />
+            </ScrollView>
+          </SafeAreaView>
           
           
         </View>
@@ -170,50 +185,50 @@ const styles = StyleSheet.create({
   container: {
     flex: 3,
     width: '100%',
+    backgroundColor: 'lightgrey',
   },
   scrollView: {
-    backgroundColor: 'lightgreen',
     top: 88,
     width: '100%',
     
+    
   },
   video: {
-    width: '99%',
-    top: 1,
-    left: 2,
+    width: '100%',
     padding: 100,
-    borderRadius: 10,
     height: undefined, // Set an appropriate height for your video
   },
+  
   bigText: {
-    fontSize: 50,
-    fontWeight: 'bold',
-    width: '100%',
-    backgroundColor: 'lightgrey',
-    padding: 10,
-    top: 3,
+    fontSize: 60,
+    height: 50,
+    fontFamily: 'SedgwickAve-Regular',
+    textAlign: 'center',
+    borderRadius: 10,
+    marginHorizontal: 100,
+    overflow: 'hidden',
+    top: 2,
+    backgroundColor: 'red',
     
   },
-  dealsImage_topLeft: {
-    resizeMode: 'contain',
-    width: '46%',
-    alignItems: 'flex-start',
-    position: 'relative',
-    height: 200,
+  horiContainer: {
+    paddingHorizontal: 5,
+    alignItems: 'center',
+    backgroundColor: 'green',
+    marginLeft: 2,
+    marginRight: 2,
+    borderRadius: 10,
     top: 5,
-    left: 10,
   },
-  dealsImage_bottomRight: {
+ dealsHori_Scroll: {
     resizeMode: 'contain',
-    width: '45%',
-    alignItems: 'flex-end',
+    borderRadius: 15,
+    height: 200,
     position: 'relative',
-    height: 190,
-    left: 200,
-    bottom: 190,
-    
-    
+    margin: 5,
+    width: 200,
   },
+  
   
   footer: {
     position: 'absolute',
