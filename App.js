@@ -92,8 +92,33 @@ const App = () => {
               <Image source={require('./assets/3Tacos.jpg')} style={styles.dealsHori_Scroll} />
               <Image source={require('./assets/rolledTacos.jpg')} style={styles.dealsHori_Scroll} />
               <Image source={require('./assets/toGoPack.jpg')} style={styles.dealsHori_Scroll} />
+              <TouchableOpacity style={styles.moreButton} onPress={handleRewardsPress}>
+                <Icon name="arrow-right" type="material" color="#fff" size={24} />
+                <Text style={styles.iconText}>All Deals</Text>
+              </TouchableOpacity>
+              <Text style={styles.emptyTerm_Hori} />
+              
             </ScrollView>
           </SafeAreaView>
+          
+          <Text style={styles.bigText_Menu}>MENU</Text>
+          
+          <SafeAreaView style={styles.horiContainer_Menu}>
+            <ScrollView horizontal={true} style={styles.horiScroll}>
+              <Image source={require('./assets/3Tacos.jpg')} style={styles.menuHori_Scroll} />
+              <Image source={require('./assets/rolledTacos.jpg')} style={styles.menuHori_Scroll} />
+              <Image source={require('./assets/toGoPack.jpg')} style={styles.menuHori_Scroll} />
+              <TouchableOpacity style={styles.moreButton} onPress={handleRewardsPress}>
+               <Icon name="arrow-right" type="material" color="#fff" size={24} />
+                <Text style={styles.iconText}>Full Menu</Text>
+              </TouchableOpacity>
+              <Text style={styles.emptyTerm_Hori} />
+              
+            </ScrollView>
+          </SafeAreaView>
+          
+          <Text style={styles.infoText}>CaliTacos 2024 </Text>
+          <Text style={styles.emptyTerm} />
           
           
         </View>
@@ -184,11 +209,12 @@ const styles = StyleSheet.create({
   
   container: {
     flex: 3,
-    width: '100%',
-    backgroundColor: 'lightgrey',
+    backgroundColor: '#2A2929',
+    height: 1000,
   },
   scrollView: {
     top: 88,
+    height: '100%',
     width: '100%',
     
     
@@ -200,15 +226,28 @@ const styles = StyleSheet.create({
   },
   
   bigText: {
-    fontSize: 60,
-    height: 50,
+    fontSize: 45,
+    height: 35,
     fontFamily: 'SedgwickAve-Regular',
     textAlign: 'center',
-    borderRadius: 10,
+    borderRadius: 4,
     marginHorizontal: 100,
     overflow: 'hidden',
     top: 2,
-    backgroundColor: 'red',
+    backgroundColor: 'green',
+    
+  },
+  bigText_Menu: {
+    fontSize: 45,
+    height: 35,
+    fontFamily: 'SedgwickAve-Regular',
+    textAlign: 'center',
+    borderRadius: 4,
+    marginHorizontal: 100,
+    overflow: 'hidden',
+    top: 7,
+    backgroundColor: '#ff1a1a',
+    
     
   },
   horiContainer: {
@@ -227,6 +266,44 @@ const styles = StyleSheet.create({
     position: 'relative',
     margin: 5,
     width: 200,
+  },
+  horiContainer_Menu: {
+    paddingHorizontal: 5,
+    alignItems: 'center',
+    backgroundColor: 'green',
+    marginLeft: 2,
+    marginRight: 2,
+    borderRadius: 10,
+    top: 9,
+  },
+  menuHori_Scroll: {
+    resizeMode: 'contain',
+    borderRadius: 15,
+    height: 200,
+    position: 'relative',
+    margin: 5,
+    width: 200,
+  },
+  moreButton: {
+    alignItems: 'center',
+    alignSelf: 'center',
+    padding: 15,
+    marginLeft: 40,
+    borderRadius: 10,
+    opacity: 0.8,
+    backgroundColor: 'grey',
+  },
+  infoText: {
+    alignSelf: 'center',
+    padding: 50,
+    fontSize: 50,
+    
+  },
+  emptyTerm_Hori: {
+    margin: 20,
+  },
+  emptyTerm: {
+    margin: 70,
   },
   
   
